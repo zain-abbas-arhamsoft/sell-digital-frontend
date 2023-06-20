@@ -1,20 +1,17 @@
-import React, {  useEffect } from "react";
-import {  useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import useForm from "../hooks/useForm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Api } from "../utils/Api";
-import { linkExpiredEndpoint,verifyTokenEndpoint } from "../utils/Endpoint";
+import { linkExpiredEndpoint, verifyTokenEndpoint } from "../utils/Endpoint";
 
 const ResetPassword = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const location = useLocation();
   const { inputValues, handleInputValues, handleFormSubmit } = useForm(
     useNavigate(),
-    location,
-    // () => {
-    //   // Redirect callback function
-    // }
+    location
   );
 
   const isLinkExpired = async (timestamp) => {
@@ -22,13 +19,9 @@ const ResetPassword = () => {
       timestamp,
     });
     if (statusCode === false) {
-      console.log("data.message", data.message);
       await toast.error(data.message);
       navigate("/");
-      // return;
     }
-    console.log("statusCode", statusCode);
-    console.log("data", data);
   };
 
   useEffect(() => {
@@ -38,34 +31,24 @@ const ResetPassword = () => {
     const id = localStorage.getItem("ID");
     isLinkExpired(timestamp);
     async function verifyToken() {
-        const { statusCode } = await Api.verifyToken(
-            verifyTokenEndpoint,
-          {
-            token,
-            id,
-          }
-        );
-        if (statusCode === false) {
-          console.log("statusCode verify Token", statusCode);
-        //   navigate("/");
-        //   return;
-        }
-      }
-      if (token) {
-        verifyToken();
-      }
+      await Api.verifyToken(verifyTokenEndpoint, {
+        token,
+        id,
+      });
+    }
+    if (token) {
+      verifyToken();
+    }
   }, []);
 
   return (
     <>
       <ToastContainer />
-      {/* {isFormOpen && ( */}
       <div>
         <div className="light-color">
           <div className="modal_centered">
             <form
               id="account_form"
-              //   ref={formRef}
               onSubmit={(e) => handleFormSubmit(e, "resetPassword")}
             >
               {/*===== Form-Header =====*/}
@@ -105,13 +88,10 @@ const ResetPassword = () => {
                   </button>
                 </div>
               </div>
-
-
             </form>
           </div>
         </div>
       </div>
-      {/* )} */}
     </>
   );
 };

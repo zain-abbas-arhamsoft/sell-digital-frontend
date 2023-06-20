@@ -3,44 +3,29 @@ import { TbTrash } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { displayMoney } from "../../helpers/utils";
 import cartContext from "../../contexts/cart/cartContext";
-// import QuantityBox from '../common/QuantityBox';
 import { Api } from "../../utils/Api";
 import { removeCart, showCarts } from "../../utils/Endpoint";
 const CartItem = (props) => {
   const { cartsLength } = useContext(cartContext);
-  const { addItem, isDeletedItem } = useContext(cartContext);
-  const { _id, info, quantity } = props;
-  console.log("props...", props);
-  console.log("props.productId", props?.productId);
+  const { addItem } = useContext(cartContext);
+  const { _id } = props;
   const { image, title, price } = props?.productId;
   const productId = props.productId._id;
   const [showPopup, setShowPopup] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  console.log("_id", _id);
-  console.log("image", image);
-  console.log("price", price);
-  console.log("_id", _id);
-  console.log("productId", productId);
   const calculateCartItems = async () => {
     const { statusCode, data } = await Api.showCart(showCarts, {});
     if (statusCode === true) {
-      console.log("data cart count", data);
-      console.log("data.cartsCount", data.cartCount);
-      //   setCartQuantity(data.cartCount)
       cartsLength(data.cartCount);
     }
   };
-  // const { removeItem } = useContext(cartContext);
   const handleRemoveItem = async (_id) => {
     try {
-      console.log("cartId", _id);
       const { statusCode, data } = await Api.removeCartItem(removeCart, {
         cartId: _id,
       });
       if (statusCode === true) {
-        console.log("data remove", data);
         addItem(data);
-        // isDeletedItem(true);
         setIsDeleting(false);
         setShowPopup(false);
         calculateCartItems();
@@ -50,10 +35,6 @@ const CartItem = (props) => {
       console.log(error);
     }
   };
-  const newPrice = displayMoney(price);
-  console.log("newPrice", newPrice);
-  const oldPrice = displayMoney(price);
-  console.log("oldPrice", oldPrice);
 
   useEffect(() => {
     if (showPopup) {
@@ -94,7 +75,6 @@ const CartItem = (props) => {
             </small>
           </h2>
 
-          {/* <QuantityBox itemId={_id} itemQuantity={quantity} /> */}
         </div>
       </div>
       {showPopup && (

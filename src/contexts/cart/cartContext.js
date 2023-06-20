@@ -7,14 +7,12 @@ const cartContext = createContext();
 const initialState = {
   cartItems: [],
   cartLength: 0,
-//   deletedItem: false,
 };
 // Cart-Provider Component
 const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   // Dispatched Actions
   const addItem = (item) => {
-    console.log("item", item);
     return dispatch({
       type: "ADD_TO_CART",
       payload: { item },
@@ -22,22 +20,14 @@ const CartProvider = ({ children }) => {
   };
 
   const emptyArray = (item) => {
-    console.log("emptyArray", item);
     return dispatch({
       type: "EMPTY_CART",
       payload: { item },
     });
   };
 
-//   const isDeletedItem = (item) => {
-//     return dispatch({
-//       type: "DELETED_ITEM",
-//       payload: { item },
-//     });
-//   };
 
   const cartsLength = (item) => {
-    console.log("cartLength context", item);
     return dispatch({
       type: "CART_LENGTH",
       payload: { item },
@@ -73,7 +63,6 @@ const CartProvider = ({ children }) => {
     decrementItem,
     emptyArray,
     cartsLength,
-    // isDeletedItem,
   };
 
   return <cartContext.Provider value={values}>{children}</cartContext.Provider>;

@@ -7,57 +7,27 @@ import CartItem from "../components/cart/CartItem";
 import EmptyView from "../components/common/EmptyView";
 import { showCarts } from "../utils/Endpoint";
 import { Api } from "../utils/Api";
-
 import { useEffect, useState } from "react";
-
 const Cart = () => {
   useDocTitle("Cart");
-  const { cartItems, deletedItem } = useContext(cartContext);
+  const { cartItems } = useContext(cartContext);
   const { cartsLength } = useContext(cartContext);
-
   const [carts, setCarts] = useState([]);
   const [cartsQuantity, setCartQuantity] = useState(0);
-  console.log("cartItems updated", cartItems);
-  console.log("deletedItem updated", deletedItem);
   const cartQuantity = carts.length;
-  console.log("cartQuantity", cartQuantity);
-  // total original price
-  const cartTotal = carts.map((item) => {
-    return item.actualPrice * item.quantity;
-  });
   const calculateCartTotal = calculateTotal(carts);
-  console.log("calculateCartTotal", calculateCartTotal);
   const displayCartTotal = displayMoney(calculateCartTotal);
-  // total discount
-  // const cartDiscount = carts.map(item => {
-  //     return (item.actualPrice - item.updatedPrice) * item.quantity;
-  // });
-  // console.log('cartDiscount',cartDiscount)
-  // const calculateCartDiscount = calculateTotal(cartDiscount);
-  // console.log('calculateCartDiscount',calculateCartDiscount)
-  // const displayCartDiscount = displayMoney(calculateCartDiscount);
-  // console.log('displayCartDiscount',displayCartDiscount)
-
-  // final total amount
-  //  const totalAmount = calculateCartTotal;
-  // console.log('totalAmount',totalAmount)
   const displayTotalAmount = displayMoney(calculateCartTotal);
-  console.log("displayTotalAmount", displayTotalAmount);
 
   const renderCarts = async () => {
     const { statusCode, data } = await Api.showCart(showCarts, {});
     if (statusCode === true) {
-      console.log("data.show cart", data);
       setCarts(data.carts);
-      // setUpdatedPrice
-      // addItem(productDetail);
     }
   };
   const calculateCartItems = async () => {
     const { statusCode, data } = await Api.showCart(showCarts, {});
     if (statusCode === true) {
-      console.log("data cart count", data);
-      console.log("data.cartsCount", data.cartCount);
       setCartQuantity(data.cartCount);
       cartsLength(data.cartCount);
     }
@@ -69,17 +39,8 @@ const Cart = () => {
   }, []); // Add cartItems as a dependency for the effect
 
   useEffect(() => {
-    // if (cartItems.length > 0) {
-      setCarts(cartItems);
-    // }
+    setCarts(cartItems);
   }, [cartItems]);
-//   useEffect(() => {
-//     renderCarts();
-//     calculateCartItems();
-//   }, []);
-  useEffect(() => {
-    console.log("carts", carts);
-  }, [carts]);
   return (
     <>
       <section id="cart" className="section">

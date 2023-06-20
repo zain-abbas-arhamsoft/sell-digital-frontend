@@ -1,92 +1,55 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { IoMdStar, IoMdCheckmark } from "react-icons/io";
-import { calculateDiscount, displayMoney } from "../helpers/utils";
+import { useParams } from "react-router-dom";
+import { IoMdCheckmark } from "react-icons/io";
 import useDocTitle from "../hooks/useDocTitle";
 import useActive from "../hooks/useActive";
 import cartContext from "../contexts/cart/cartContext";
-import productsData from "../data/productsData";
 import SectionsHead from "../components/common/SectionsHead";
-import RelatedSlider from "../components/sliders/RelatedSlider";
-import ProductSummary from "../components/product/ProductSummary";
 import Services from "../components/common/Services";
-import commonContext from "../contexts/common/commonContext";
 import { Api } from "../utils/Api";
-import ProductCard from "../components/product/ProductCard";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   productDetailEndpoint,
   relatedProductDetailEndpoint,
   addCartItem,
-  showCarts
+  showCarts,
 } from "../utils/Endpoint";
 import RelatedProductCard from "../components/product/RelatedProductCard";
-import useForm from "../hooks/useForm";
 const ProductDetails = () => {
   useDocTitle("Product Details");
   const [productDetail, setProductDetail] = useState({});
   const [relatedProductDetail, setRelatedProductDetail] = useState([]);
-
   const [image, setImage] = useState([]);
-  const [productId, setProductId] = useState();
   const { cartsLength } = useContext(cartContext);
-
-  //   const { productID } = useContext(commonContext);
-  //   console.log("productID usecontext", productID);
-  //   const { handleActive, activeClass } = useActive(0);
-
-  const { addItem } = useContext(cartContext);
-  // const { handleActive, activeClass } = useActive(0);
-  const { active, handleActive, activeClass } = useActive(false);
-
+  const {  handleActive, activeClass } = useActive(false);
   const { productID } = useParams();
-  console.log("productID", productID);
-  // here the 'id' received has 'string-type', so converting it to a 'Number'
-  // const prodId = parseInt(productId);
-
-  // // showing the Product based on the received 'id'
-  // const product = productsData.find(item => item.id === prodId);
-
-  //    const { image } = productDetail?.product;
-  // , title, info, category, finalPrice, originalPrice, ratings, rateCount
   const [previewImg, setPreviewImg] = useState(image[0]);
 
-
   const calculateCartItems = async () => {
-    const { statusCode, data } = await Api.showCart(
-      showCarts,
-      {}
-    );
+    const { statusCode, data } = await Api.showCart(showCarts, {});
     if (statusCode === true) {
-      console.log('data cart count',data)
-      console.log('data.cartsCount',data.cartCount)
-    //   setCartQuantity(data.cartCount)
-      cartsLength(data.cartCount)
+      cartsLength(data.cartCount);
     }
-  }
-  // // handling Add-to-cart
+  };
+  // handling Add-to-cart
   const handleAddItem = async (productDetail) => {
-    if (!localStorage.getItem('E_COMMERCE_TOKEN')) {
+    if (!localStorage.getItem("E_COMMERCE_TOKEN")) {
       toast.error("please login to add item in cart");
       return;
     }
-    console.log('productDetail._id',productDetail._id)
     handleActive(productDetail._id);
     setTimeout(() => {
-        handleActive(false);
+      handleActive(false);
     }, 3000);
-   
     const { statusCode, data } = await Api.addItemInCart(addCartItem, {
       productDetail: {
         ...productDetail,
-        quantity: 1 // Set the desired quantity value
-      }
+        quantity: 1, // Set the desired quantity value
+      },
     });
     if (statusCode === true) {
-      console.log('data.cart', data.data)
-      calculateCartItems()
-      // addItem(data.data);
+      calculateCartItems();
     }
   };
 
@@ -94,7 +57,6 @@ const ProductDetails = () => {
   useEffect(() => {
     setPreviewImg(image[0]);
     handleActive(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [image]);
 
   // // handling Preview image
@@ -103,26 +65,17 @@ const ProductDetails = () => {
     handleActive(i);
   };
 
-  // // calculating Prices
-  // const discountedPrice = originalPrice - finalPrice;
-  // const newPrice = displayMoney(finalPrice);
-  // const oldPrice = displayMoney(originalPrice);
-  // const savedPrice = displayMoney(discountedPrice);
-  // const savedDiscount = calculateDiscount(discountedPrice, originalPrice);
   const getProductDetails = async () => {
     const { statusCode, data } = await Api.getProductDetail(
       `${productDetailEndpoint}${productID}`,
       {}
     );
-    console.log("ProductDetail", data);
     if (statusCode === true) {
       setProductDetail(data);
       setImage(data.image);
     }
   };
   const getRelatedProducts = async () => {
-    console.log("categoryId", productDetail?.categoryId._id);
-    console.log("productId", productDetail?._id);
     const categoryId = productDetail.categoryId._id;
     const productId = productDetail._id;
     const { statusCode, data } = await Api.getRelatedDetail(
@@ -132,26 +85,19 @@ const ProductDetails = () => {
         productId,
       }
     );
-    console.log("Related Products", data);
     if (statusCode === true) {
       setRelatedProductDetail(data);
-      // setImage(data.image)
     }
   };
   useEffect(() => {
     getProductDetails();
   }, [productID]);
   useEffect(() => {
-    // setProductId(productID);
-    // console.log('relatedProductDetail', relatedProductDetail)
-    // // console.log('productDetail.image',productDetail?.image)
-    // console.log('productDetail?.product', productDetail?.product)
-    // console.log("productDetail...", productDetail);
     getRelatedProducts();
   }, [productDetail]);
   return (
     <>
-      <section id="product_details" >
+      <section id="product_details">
         <div className="container">
           <div className="wrapper prod_details_wrapper">
             {/*=== Product Details Left-content ===*/}
@@ -164,18 +110,12 @@ const ProductDetails = () => {
                       className={`tabs_item ${activeClass(i)}`}
                       onClick={() => handlePreviewImg(i)}
                     >
-                      <img
-                        src={img}
-                        alt="product-img"
-                      />
+                      <img src={img} alt="product-img" />
                     </div>
                   ))}
               </div>
               <figure className="prod_details_img">
-                <img
-                  src={previewImg}
-                  alt="product-img"
-                />
+                <img src={previewImg} alt="product-img" />
               </figure>
             </div>
 
@@ -224,8 +164,12 @@ const ProductDetails = () => {
                 <button
                   type="button"
                   // className="btn"
-                  className={`btn products_btn ${activeClass(productDetail._id)}`}
-                  onClick={() => { handleAddItem(productDetail) }}
+                  className={`btn products_btn ${activeClass(
+                    productDetail._id
+                  )}`}
+                  onClick={() => {
+                    handleAddItem(productDetail);
+                  }}
                 >
                   Add to cart
                 </button>
@@ -235,18 +179,14 @@ const ProductDetails = () => {
         </div>
       </section>
 
-      {/* <ProductSummary {...product} /> */}
 
       <section id="related_products" className="section">
         <div className="container">
           <SectionsHead heading="Related Products" />
           <div className="wrapper products_wrapper">
-            {/* <RelatedSlider /> */}
             {relatedProductDetail.length > 0 &&
               relatedProductDetail.map((item) => (
-                //<SwiperSlide key={item.id}>
                 <RelatedProductCard key={item.id} {...item} />
-                //</SwiperSlide>
               ))}
           </div>
         </div>

@@ -29,8 +29,6 @@ const initialState = {
 const FiltersProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(filtersReducer, initialState);
-
-
     /* Loading All Products on the initial render */
     useEffect(() => {
 

@@ -16,9 +16,9 @@ const MouseTracker = () => {
         {}
       );
       if (statusCode === true) {
-      //  if( localStorage.getItem('token_key'))
-      //  localStorage.removeItem('token_key')
-        // navigate("/");
+        if (localStorage.getItem("E_COMMERCE_TOKEN"))
+          localStorage.removeItem("E_COMMERCE_TOKEN");
+          navigate("/");
       }
     };
 
@@ -42,7 +42,6 @@ const MouseTracker = () => {
     };
 
     const handleVisibilityChange = () => {
-      // console.log("document.hidden", document.hidden);
       if (!document.hidden) {
         clearTimeout(timeoutRef.current);
         if (idleRef.current && shouldCallAPI()) {

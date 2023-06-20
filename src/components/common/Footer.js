@@ -73,7 +73,7 @@ const Footer = () => {
                         <div className="foot_copyright">
                             <p>
                                 {currYear} | SellDigital. All Rights Reserved.
-                                {/* Built by | <a href=""></a> */}
+                              
                             </p>
                         </div>
                         <div className="foot_social">

@@ -2,8 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, A11y, Autoplay } from "swiper";
-import { displayMoney } from "../../helpers/utils";
-import productsData from "../../data/productsData";
 import { Api } from "../../utils/Api";
 import { recentlyAddedProducts } from "../../utils/Endpoint";
 import "swiper/scss";
@@ -11,22 +9,14 @@ import "swiper/scss/autoplay";
 import "swiper/scss/pagination";
 import "swiper/scss/effect-coverflow";
 import commonContext from "../../contexts/common/commonContext";
-
 const FeaturedSlider = () => {
   const { setProductID } = useContext(commonContext);
-  const searchedProduct = useContext(commonContext);
-  console.log("fs", searchedProduct);
-
   const [recentlyAdded, setRecentlyAdded] = useState([]);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
   const recentlyAddedProduct = async () => {
     const { statusCode, data } = await Api.getRecentlyAddedProducts(
       recentlyAddedProducts,
       {}
     );
-    console.log("recentlyAddedProducts data", data);
     if (statusCode === true) {
       setRecentlyAdded(data);
     }
@@ -35,46 +25,7 @@ const FeaturedSlider = () => {
     recentlyAddedProduct();
   }, []);
 
-  useEffect(() => {
-    console.log("fs...", filteredProducts);
-    console.log("sp...", searchOpen);
-  }, [filteredProducts]);
-  useEffect(() => {
-    console.log("enter");
-    if (
-      searchedProduct.searchResults &&
-      searchedProduct.searchResults.length > 0
-    ) {
-      setFilteredProducts(searchedProduct.searchResults);
-    } else if (
-      searchedProduct.searchResults &&
-      searchedProduct.searchResults.length === 0 &&
-      searchedProduct.isSearchOpen === true
-    ) {
-      console.log("else if");
-      setFilteredProducts([]);
-    }
-    if (
-      searchedProduct.searchResults &&
-      searchedProduct.searchResults.categoriesData &&
-      searchedProduct.searchResults.categoriesData.length > 0
-    ) {
-      console.log("next if");
-      setFilteredProducts(searchedProduct.searchResults.categoriesData);
-    } else if (
-      searchedProduct.searchResults &&
-      searchedProduct.searchResults.categoriesData &&
-      searchedProduct.searchResults.categoriesData.length === 0
-    ) {
-      console.log("next else");
-      setFilteredProducts([]);
-    }
-    setSearchOpen(searchedProduct.isSearchOpen);
-  }, [searchedProduct]);
-
   const handleImageClick = (productID) => {
-    // Perform any action you want with the productID when the image is clicked
-    console.log("Product ID:", productID);
     setProductID(productID);
   };
 
@@ -111,10 +62,7 @@ const FeaturedSlider = () => {
       }}
       className="featured_swiper"
     >
-      {searchOpen === true && filteredProducts.length === 0 ? (
-        <></>
-      ) : (
-        recentlyAdded.length > 0 &&
+        {recentlyAdded.length > 0 &&
         recentlyAdded.map((item) => {
           const { image, title, price } = item;
           const productID = item._id;
@@ -141,8 +89,8 @@ const FeaturedSlider = () => {
               </h2>
             </SwiperSlide>
           );
-        })
-      )}
+        })}
+
     </Swiper>
   );
 };

@@ -13,7 +13,6 @@ const commonReducer = (state, action) => {
       };
 
     case "TOGGLE_SEARCH":
-    //   console.log("action.payload.toggle", action.payload.toggle);
       return {
         ...state,
         isSearchOpen: action.payload.toggle,

@@ -13,14 +13,12 @@ export const displayMoney = (n) => {
 // Calculate Discount Percentage
 export const calculateDiscount = (discountedPrice, originalPrice) => {
     const discountedPercent = (discountedPrice / originalPrice) * 100;
-
     return Math.round(discountedPercent);
 };
 
 
 // Calculate Total Amount
 export const calculateTotal = (arr) => {
-    console.log('arr', arr)
     let total = arr.reduce((accum, item) => accum + item.updatedPrice, 0);
     total = Number(total)
     console.log('total', total)

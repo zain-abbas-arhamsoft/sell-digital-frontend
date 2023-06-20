@@ -9,9 +9,7 @@ const BackTop = () => {
     // back-to-top visibility toggling
     useEffect(() => {
         const handleScroll = () => window.scrollY >= 800 ? setIsVisible(true) : setIsVisible(false);
-
         window.addEventListener('scroll', handleScroll);
-
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };

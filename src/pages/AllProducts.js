@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
-import useActive from "../hooks/useActive";
 import ProductCard from "../components/product/ProductCard";
 import { useEffect, useState } from "react";
 import { Api } from "../utils/Api";
@@ -9,97 +8,73 @@ import commonContext from "../contexts/common/commonContext";
 import { useContext } from "react";
 
 const AllProducts = () => {
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [searchOpen, setSearchOpen] = useState(false);
-  // const [check, setCheck] = useState(0);
+  const [state, setState] = useState({
+    products: [],
+    filteredProducts: [],
+    searchOpen: false,
+  });
   const searchedProduct = useContext(commonContext);
-  console.log("searchedProdutct AllProducts", searchedProduct);
-
-  const getAllProducts = async () => {
-    console.log("getAllProductEndpoint", getAllProductEndpoint);
+  const productsRequest = async () => {
     const { statusCode, data } = await Api.getAllProducts(
       getAllProductEndpoint,
       {}
     );
-    console.log("View all data...", data.categoriesData);
     if (statusCode === true) {
-      setProducts(data.categoriesData);
+      setState((prevState) => ({
+        ...prevState,
+        products: data.categoriesData,
+      }));
     }
   };
 
   useEffect(() => {
-    getAllProducts();
+    productsRequest();
   }, []);
+
   useEffect(() => {
     if (
       searchedProduct.searchResults &&
       searchedProduct.searchResults.length > 0
     ) {
-      setFilteredProducts(searchedProduct.searchResults);
+      setState((prevState) => ({
+        ...prevState,
+        filteredProducts: searchedProduct.searchResults,
+      }));
     } else if (
       searchedProduct.searchResults &&
-      searchedProduct.searchResults.length === 0
+      searchedProduct.searchResults.length === 0 &&
+      searchedProduct.isSearchOpen === true
     ) {
-      // setCheck(1);
-      setFilteredProducts([]);
+      setState((prevState) => ({ ...prevState, filteredProducts: [] }));
     }
-
     if (
       searchedProduct.searchResults &&
       searchedProduct.searchResults.categoriesData &&
       searchedProduct.searchResults.categoriesData.length > 0
     ) {
-      setFilteredProducts(searchedProduct.searchResults.categoriesData);
+      setState((prevState) => ({
+        ...prevState,
+        filteredProducts: searchedProduct.searchResults.categoriesData,
+      }));
     } else if (
       searchedProduct.searchResults &&
       searchedProduct.searchResults.categoriesData &&
       searchedProduct.searchResults.categoriesData.length === 0
     ) {
-      // setCheck(1);
-      setFilteredProducts([]);
+      setState((prevState) => ({ ...prevState, filteredProducts: [] }));
     }
-    setSearchOpen(searchedProduct.isSearchOpen);
+    setState((prevState) => ({
+      ...prevState,
+      searchOpen: searchedProduct.isSearchOpen,
+    }));
   }, [searchedProduct]);
 
-  // useEffect(() => {
-  //   console.log("search", searchedProduct);
-  //   if (
-  //     searchedProduct.searchResults &&
-  //     searchedProduct.searchResults.length > 0
-  //   ) {
-  //     setCheck(1);
-  //     console.log("searchedProduct.......", searchedProduct);
-  //     console.log(
-  //       "searchedProduct.searchResults.......",
-  //       searchedProduct.searchResults
-  //     );
-  //     setFilteredProducts(searchedProduct.searchResults);
-  //   } else {
-  //     console.log("else search");
-  //     setFilteredProducts([]);
-  //   }
-  //   if (
-  //     searchedProduct.searchResults.categoriesData &&
-  //     searchedProduct.searchResults.categoriesData.length > 0
-  //   ) {
-  //     console.log("next if");
-  //     setFilteredProducts(searchedProduct.searchResults.categoriesData);
-  //   } else {
-  //     setFilteredProducts([]);
-  //   }
-  // }, [searchedProduct]);
+  const { products, filteredProducts } = state;
 
-  useEffect(() => {
-    console.log("products", products);
-    console.log("filteredProducts", filteredProducts);
-  }, [products]);
   return (
     <>
       <div className="wrapper products_wrapper">
-        {searchOpen === true && filteredProducts.length === 0 ? (
-          <></>
-        ) : (
+        <>
           <>
             {filteredProducts.length > 0
               ? filteredProducts.map((item) => (
@@ -107,17 +82,18 @@ const AllProducts = () => {
                 ))
               : products &&
                 products
-                  .slice(0, 9)
+                  .slice(0, 11)
                   .map((item) => <ProductCard key={item.id} {...item} />)}
           </>
-        )}
-        {filteredProducts.length > 7 || products.length > 7 ? (
+        </>
+
+        {filteredProducts.length >= 7 && (
           <div className="card products_card browse_card">
             <Link to="/all-products">
               Browse All <br /> Products <BsArrowRight />
             </Link>
           </div>
-        ) : null}
+        )}
       </div>
     </>
   );
