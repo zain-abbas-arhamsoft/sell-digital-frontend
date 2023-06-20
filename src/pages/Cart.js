@@ -13,7 +13,6 @@ const Cart = () => {
   const { cartItems } = useContext(cartContext);
   const { cartsLength } = useContext(cartContext);
   const [carts, setCarts] = useState([]);
-  const [cartsQuantity, setCartQuantity] = useState(0);
   const cartQuantity = carts.length;
   const calculateCartTotal = calculateTotal(carts);
   const displayCartTotal = displayMoney(calculateCartTotal);
@@ -28,7 +27,6 @@ const Cart = () => {
   const calculateCartItems = async () => {
     const { statusCode, data } = await Api.showCart(showCarts, {});
     if (statusCode === true) {
-      setCartQuantity(data.cartCount);
       cartsLength(data.cartCount);
     }
   };

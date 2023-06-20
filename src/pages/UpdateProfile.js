@@ -20,7 +20,6 @@ const UpdateProfilePage = () => {
     e.preventDefault();
 
     const {
-      email,
       firstName,
       lastName,
       phoneNumber,

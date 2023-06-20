@@ -40,7 +40,7 @@ const ProductCard = (props) => {
       handleActive(false);
     }, 3000);
 
-    const { statusCode, data } = await Api.addItemInCart(addCartItem, {
+    const { statusCode } = await Api.addItemInCart(addCartItem, {
       productDetail: {
         _id: productID,
         price: productPrice,
@@ -69,7 +69,7 @@ const ProductCard = (props) => {
         >
           <Link to={`/product-details/${productID}`}>
             <div>
-              <img className="rounded-img" src={productImage[0]} />
+              <img className="rounded-img" src={productImage[0]} alt="" />
             </div>
           </Link>
         </figure>

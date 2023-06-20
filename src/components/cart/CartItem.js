@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { TbTrash } from "react-icons/tb";
 import { Link } from "react-router-dom";
-import { displayMoney } from "../../helpers/utils";
 import cartContext from "../../contexts/cart/cartContext";
 import { Api } from "../../utils/Api";
 import { removeCart, showCarts } from "../../utils/Endpoint";

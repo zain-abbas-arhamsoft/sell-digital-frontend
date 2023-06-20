@@ -42,7 +42,7 @@ const ProductDetails = () => {
     setTimeout(() => {
       handleActive(false);
     }, 3000);
-    const { statusCode, data } = await Api.addItemInCart(addCartItem, {
+    const { statusCode } = await Api.addItemInCart(addCartItem, {
       productDetail: {
         ...productDetail,
         quantity: 1, // Set the desired quantity value

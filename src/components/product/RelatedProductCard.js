@@ -51,7 +51,7 @@ const RelatedProductCard = (props) => {
         >
           <Link to={`/product-details/${_id}`}>
             <div>
-              <img className="rounded-img" src={image[0]} />
+              <img className="rounded-img" src={image[0]} alt="" />
             </div>
           </Link>
         </figure>
