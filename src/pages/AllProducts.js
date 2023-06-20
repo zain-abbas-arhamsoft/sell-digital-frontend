@@ -87,13 +87,13 @@ const AllProducts = () => {
           </>
         </>
 
-        {filteredProducts.length >= 7 && (
+    
           <div className="card products_card browse_card">
             <Link to="/all-products">
               Browse All <br /> Products <BsArrowRight />
             </Link>
           </div>
-        )}
+      
       </div>
     </>
   );

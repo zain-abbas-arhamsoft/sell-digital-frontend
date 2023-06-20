@@ -87,13 +87,13 @@ const FeaturedProducts = () => {
                 .slice(0, 11)
                 .map((item) => <ProductCard key={item.id} {...item} />)}
         </>
-        {filteredProducts.length >= 2 && (
+       
           <div className="card products_card browse_card">
             <Link to="/featured-products">
               Browse Featured <br /> Products <BsArrowRight />
             </Link>
           </div>
-        )}
+       
       </div>
     </>
   );
