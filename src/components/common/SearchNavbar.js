@@ -78,6 +78,7 @@ const SearchNavbar = () => {
       {}
     );
     if (statusCode === true) {
+      console.log("data.products", data.products);
       setSearchResults(data.products);
       toggleSearch(data.allProductsFetched);
     }

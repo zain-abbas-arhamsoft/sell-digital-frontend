@@ -13,6 +13,7 @@ const FeaturedProducts = () => {
     searchOpen: false,
   });
   const searchedProduct = useContext(commonContext);
+  console.log("searched", searchedProduct);
   const featuredProductsRequest = async () => {
     const { statusCode, data } = await Api.getFeaturedProducts(
       featuredProductEndpoint,
@@ -35,6 +36,7 @@ const FeaturedProducts = () => {
       searchedProduct.searchResults &&
       searchedProduct.searchResults.length > 0
     ) {
+      console.log("if");
       setState((prevState) => ({
         ...prevState,
         filteredProducts: searchedProduct.searchResults.filter(
@@ -46,6 +48,7 @@ const FeaturedProducts = () => {
       searchedProduct.searchResults.length === 0 &&
       searchedProduct.isSearchOpen === true
     ) {
+      console.log("else if");
       setState((prevState) => ({ ...prevState, filteredProducts: [] }));
     }
     if (
@@ -53,6 +56,7 @@ const FeaturedProducts = () => {
       searchedProduct.searchResults.categoriesData &&
       searchedProduct.searchResults.categoriesData.length > 0
     ) {
+      console.log("next if");
       setState((prevState) => ({
         ...prevState,
         filteredProducts: searchedProduct.searchResults.categoriesData.filter(
@@ -64,6 +68,7 @@ const FeaturedProducts = () => {
       searchedProduct.searchResults.categoriesData &&
       searchedProduct.searchResults.categoriesData.length === 0
     ) {
+      console.log("next else");
       setState((prevState) => ({ ...prevState, filteredProducts: [] }));
     }
     setState((prevState) => ({
@@ -72,22 +77,29 @@ const FeaturedProducts = () => {
     }));
   }, [searchedProduct]);
 
-  const { featuredProducts, filteredProducts } = state;
+  const { featuredProducts, filteredProducts, searchOpen } = state;
 
+  useEffect(() => {
+    console.log("filteredProducts", filteredProducts);
+  }, [filteredProducts]);
   return (
     <>
       <div className="wrapper products_wrapper">
-        <>
-          {filteredProducts.length > 0
-            ? filteredProducts.map((item) => (
-                <ProductCard key={item.id} {...item} />
-              ))
-            : featuredProducts &&
-              featuredProducts
-                .slice(0, 11)
-                .map((item) => <ProductCard key={item.id} {...item} />)}
-        </>
-       
+        {searchOpen === true && filteredProducts.length === 0 ? (
+          <></>
+        ) : (
+          <>
+            {filteredProducts && filteredProducts.length > 0
+              ? filteredProducts.map((item) => (
+                  <ProductCard key={item.id} {...item} />
+                ))
+              : featuredProducts &&
+                featuredProducts
+                  .slice(0, 11)
+                  .map((item) => <ProductCard key={item.id} {...item} />)}
+          </>
+        )}
+        
           <div className="card products_card browse_card">
             <Link to="/featured-products">
               Browse Featured <br /> Products <BsArrowRight />

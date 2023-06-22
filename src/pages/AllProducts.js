@@ -69,12 +69,14 @@ const AllProducts = () => {
     }));
   }, [searchedProduct]);
 
-  const { products, filteredProducts } = state;
+  const { products, filteredProducts, searchOpen } = state;
 
   return (
     <>
       <div className="wrapper products_wrapper">
-        <>
+        {searchOpen === true && filteredProducts.length === 0 ? (
+          <></>
+        ) : (
           <>
             {filteredProducts.length > 0
               ? filteredProducts.map((item) => (
@@ -85,15 +87,13 @@ const AllProducts = () => {
                   .slice(0, 11)
                   .map((item) => <ProductCard key={item.id} {...item} />)}
           </>
-        </>
+        )}
 
-    
-          <div className="card products_card browse_card">
-            <Link to="/all-products">
-              Browse All <br /> Products <BsArrowRight />
-            </Link>
-          </div>
-      
+        <div className="card products_card browse_card">
+          <Link to="/all-products">
+            Browse All <br /> Products <BsArrowRight />
+          </Link>
+        </div>
       </div>
     </>
   );
