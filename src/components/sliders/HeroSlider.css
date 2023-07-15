@@ -32,6 +32,17 @@
     background-image: radial-gradient( circle at 0% center, rgb(242, 169, 158), rgba(255, 0, 0, 0) 40% );
 
   }
+
+  .main-heading {
+    font-size: 70px;
+     color: #ad0000;
+  }
+
+  .sub-heading {
+    font-size: 41px;
+    font-weight: 700;
+    margin-top: 10px;
+  }
   
   .bullet-list {
     margin-top: 20px;
@@ -102,3 +113,50 @@
   border-radius: 20px;
   overflow: hidden;
 }
+
+
+@media (max-width: 1250px) {
+  .first-half1 {
+    width: 100%;
+  }
+  .second-half{
+    width: 0;
+  }
+  .display-none {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .main-heading {
+    font-size: 50px;
+  }
+  
+  .sub-heading {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 400px) {
+  .main-heading {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .sub-heading {
+    font-size: 25px;
+  }
+
+  .bullet-list {
+    font-size: 15px;
+  }
+
+  .first-half-content {
+    padding-left: 8%;
+  }
+  .red-button {
+    margin-left: 1px;
+  }
+}
+
+

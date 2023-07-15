@@ -217,7 +217,7 @@ const getRecentlyAddedProducts = async (path, body) => {
     };
     const res = await fetch(config.baseURL + path, params);
     const data = await res.json();
-    return { statusCode: data.success, data: data.filteredProducts };
+    return { statusCode: data.success, data: data.recentlyAddedProducts };
   } catch (e) {
     console.log(`error  post Request (${path}) :- `, e);
   }

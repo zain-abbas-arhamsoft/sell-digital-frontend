@@ -18,6 +18,7 @@ const FeaturedSlider = () => {
       {}
     );
     if (statusCode === true) {
+      console.log('data recently added products',data)
       setRecentlyAdded(data);
     }
   };

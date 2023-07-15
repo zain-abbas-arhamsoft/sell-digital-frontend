@@ -18,7 +18,7 @@ const MouseTracker = () => {
       if (statusCode === true) {
         if (localStorage.getItem("E_COMMERCE_TOKEN"))
           localStorage.removeItem("E_COMMERCE_TOKEN");
-          navigate("/");
+          // navigate("/");
       }
     };
 

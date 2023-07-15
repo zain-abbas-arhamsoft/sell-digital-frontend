@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineUser, AiOutlineLock } from "react-icons/ai";
+import { AiOutlineUser, AiOutlineLock} from "react-icons/ai";
 import commonContext from "../../contexts/common/commonContext";
 import AccountForm from "../form/AccountForm";
 import SearchNavbar from "./SearchNavbar";
@@ -10,7 +10,6 @@ const Header = () => {
   const { formUserInfo, toggleForm } = useContext(commonContext);
   const navigate = useNavigate();
   const token = getToken(); // Get the token from localStorage
-  console.log('token')
   const handleLogout = () => {
     removeToken(); // Remove the token from localStorage
     toggleForm(false); // Reset formUserInfo to false
@@ -22,17 +21,17 @@ const Header = () => {
         <div className="container light-color">
           <div className="navbar">
             <h2 className="nav_logo">
-              <Link to="/">Sell Digital</Link>
+              <Link to="/"></Link>
             </h2>
             <nav className="nav_actions">
               <div className="cart_action item-hover">
-                <Link to="/reset-pass">
+                <Link to="/about-us">
                   <p>About Us</p>
                 </Link>
               </div>
 
               <div className="cart_action item-hover">
-                <Link to="/cart">
+                <Link to="/contact-us">
                   <p>Contact Us</p>
                 </Link>
               </div>
@@ -44,6 +43,8 @@ const Header = () => {
                   </Link>
                 </div>
               )}
+              
+
 
               {token && (
                 <div className="cart_action item-hover Icon-props">

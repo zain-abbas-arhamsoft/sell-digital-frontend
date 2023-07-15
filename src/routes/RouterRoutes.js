@@ -10,6 +10,8 @@ import ErrorPage from '../pages/ErrorPage';
 import  ResetPassword  from '../pages/ResetPassword';
 import UpdateProfilePage from '../pages/UpdateProfile';
 import SessionManager from '../pages/SessionManager';
+import AboutUs from '../staticPages/AboutUs';
+import ContactUs from '../staticPages/ContactUs';
 const RouterRoutes = () => {
     useScrollRestore();
     return (
@@ -24,6 +26,8 @@ const RouterRoutes = () => {
                 <Route path="/product-details/:productID" element={<ProductDetails />} />
                 <Route path="/update-profile" element={<UpdateProfilePage />} />
                 <Route path="*" element={<ErrorPage />} />
+                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/contact-us" element={<ContactUs />} />
             </Routes>
         </>
     );

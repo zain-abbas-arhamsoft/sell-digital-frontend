@@ -27,16 +27,10 @@ const HeroSlider = () => {
       <div className="slider-container">
         <div className="first-half1">
           <div className="first-half-content">
-            <h2 style={{ "font-size": "70px", color: "#ad0000" }}>
+            <h2 className="main-heading">
               Sell Digital
             </h2>
-            <small
-              style={{
-                "font-size": "41px",
-                "font-weight": "700",
-                "margin-top": "10px",
-              }}
-            >
+            <small className="sub-heading">
               Digital Account Marketplace
             </small>
             <ul className="bullet-list">
@@ -74,8 +68,8 @@ const HeroSlider = () => {
           </div>
         </div>
 
-        <div className={` second-half`} >
-          <div className={`myclass social-account-color ${slides[currentSlideIndex].type}`}>
+        <div className="second-half ">
+          <div className={`display-none myclass social-account-color ${slides[currentSlideIndex].type}`}>
             <div className="small-slider" style={{ marginLeft: "-50px" }}>
               <Carousel
                 showThumbs={false}
