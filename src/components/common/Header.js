@@ -10,6 +10,7 @@ const Header = () => {
   const { formUserInfo, toggleForm } = useContext(commonContext);
   const navigate = useNavigate();
   const token = getToken(); // Get the token from localStorage
+  console.log('token')
   const handleLogout = () => {
     removeToken(); // Remove the token from localStorage
     toggleForm(false); // Reset formUserInfo to false
