@@ -1,5 +1,5 @@
 const devConfig = {
-    baseURL: "http://localhost:8083",
+    baseURL: " https://selldigital-backend.up.railway.app",
   };
   // http://localhost:8083
   // https://selldigital-backend.up.railway.app
