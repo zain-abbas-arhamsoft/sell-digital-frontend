@@ -61,8 +61,19 @@
     border-radius: 4px;
     padding: 4px;
     height: 45px;
-    width:200px;
+    width:200px;  
+  }
 
+  .search-bar-wrapper-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 7px;
+    height: 45px;
+    margin-bottom: 20px;
+    width:260px;  
   }
   
   input[type="text"] {
@@ -110,6 +121,12 @@
 
 .display-visible{
   visibility: hidden;
+}
+
+.inner-buttons {
+  display: flex;
+  margin-left:20px;
+  gap:1rem
 }
 
 
@@ -324,7 +341,8 @@
 .side_cancel_btn {
   display: flex;
   justify-content: end;
-  padding: 10%;
+  padding-top: 7%;
+  padding-right: 7%;
 }
 
 .side_cancel_btn :hover {

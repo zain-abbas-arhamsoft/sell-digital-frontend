@@ -51,8 +51,9 @@ const ProductCard = (props) => {
       calculateCartItems();
     }
   };
-  
+
   const handleImageClick = () => {
+    console.log('productID',productID)
     // Perform any action you want with the productID when the image is clicked
     setProductID(productID);
   };
@@ -82,11 +83,20 @@ const ProductCard = (props) => {
           <h5 className="products_desc">{productDescription}</h5>
           <div className="separator"></div>
 
-          <h4 className="products_follwers">{`${
-            productFollowers / 1000
-          }K Followers`}</h4>
-          <br></br>
-          <h3 className="products_price">
+          <div className="followers-price-bar">
+            <h3 className="products_follwers">{`${
+              productFollowers / 1000
+            }K`}</h3>
+
+            <h3 className="products_price">{`${productPrice}`}</h3>
+          </div>
+
+          <div className="followers-price-bar">
+            <h4>Followers</h4>
+            <h4>PKR</h4>
+          </div>
+          
+          {/* <h3 className="products_price">
             {`${productPrice}    `}
             <small className="del-text-color">
               <del className="del-text-color">{`${
@@ -94,7 +104,7 @@ const ProductCard = (props) => {
               }`}</del>
               {` PKR`}
             </small>
-          </h3>
+          </h3> */}
           <button
             type="button"
             className={`btn products_btn ${activeClass(productID)}`}
@@ -102,7 +112,6 @@ const ProductCard = (props) => {
               handleAddItem(productID);
             }}
           >
-           
             Add to Cart
           </button>
         </div>

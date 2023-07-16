@@ -2,18 +2,12 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   AiOutlineShoppingCart,
-  AiOutlineDown,
-  AiOutlineCaretDown,
   AiOutlineSearch,
-  AiOutlineDelete,
 } from "react-icons/ai";
 import commonContext from "../../contexts/common/commonContext";
 import cartContext from "../../contexts/cart/cartContext";
 import Select from "react-select";
-
 import "./SearchNavbar.css";
-// import Dropdown from "react-dropdown";
-// import "react-dropdown/style.css";
 import { Api } from "../../utils/Api";
 import { getToken } from "../../utils/localstorage"; // Import getToken function
 import {
@@ -22,11 +16,6 @@ import {
   getAllProductEndpoint,
 } from "../../utils/Endpoint";
 
-// const options = [
-//   { value: "option1", label: "Option 1 options of the year" },
-//   { value: "option2", label: "Option 2" },
-//   { value: "option3", label: "Option 3" },
-// ];
 
 const SearchNavbar = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -37,12 +26,30 @@ const SearchNavbar = () => {
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);
   };
-
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
+  
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const threshold = 50; // Adjust this threshold as needed
+      const topOffset = window.scrollY;
+
+      setIsSticky(topOffset > threshold);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  
+  
+  
+  
+  
 
   const handleItemClick = (item) => {
     console.log(item); // Replace with your desired action
@@ -75,10 +82,10 @@ const SearchNavbar = () => {
       price: "Price",
       followers: "Followers",
     };
-    console.log('searchInputRef',searchInputRef.current)
+    console.log("searchInputRef", searchInputRef.current);
     searchTextRef.current = ""; // Update the ref value directly
     searchInputRef.current.value = "";
-    console.log('searchInputRef...',searchInputRef.current)
+    console.log("searchInputRef...", searchInputRef.current);
     const { statusCode, data } = await Api.getAllProducts(
       getAllProductEndpoint,
       {}
@@ -113,7 +120,7 @@ const SearchNavbar = () => {
       "selectedOptionsRef.current.category",
       selectedOptionsRef.current.category
     );
-    console.log('searchTextRef.current',searchTextRef.current)
+    console.log("searchTextRef.current", searchTextRef.current);
     const parameters = {
       category:
         selectedOptionsRef.current.category.value !== "Category"
@@ -223,7 +230,7 @@ const SearchNavbar = () => {
 
   return (
     <>
-      <nav id="second-navbar">
+      <nav id="second-navbar" className={isSticky ? 'sticky' : ''}>
         <header id="searchNavbar">
           <div className="outer-padding">
             <nav className="second-nav">
@@ -249,116 +256,12 @@ const SearchNavbar = () => {
                   <Link to="/">Sell Digital</Link>
                 </div>
 
-                {/* <div className="cart_action item-hover ">
-                <Dropdown
-                  options={options.category}
-                  onChange={(option) =>
-                    (selectedOptionsRef.current.category = option.value)
-                  }
-                  value={selectedOptionsRef.current.category}
-                />
-              </div> */}
-
-                {/* <div className="cart_action item-hover ">
-                <Dropdown
-                  options={options.subCategory}
-                  onChange={(option) =>
-                    (selectedOptionsRef.current.subCategory = option.value)
-                  }
-                  value={selectedOptionsRef.current.subCategory}
-                />
-              </div> */}
-
-                {/* <div className="cart_action item-hover ">
-                <Dropdown
-                  options={options.followers}
-                  onChange={(option) =>
-                    (selectedOptionsRef.current.followers = option.value)
-                  }
-                  value={selectedOptionsRef.current.followers}
-                />
-              </div> */}
-                {/* 
-                <div className="cart_action item-hover">
-                <Dropdown
-                  options={options.price}
-                  onChange={(option) =>
-                    (selectedOptionsRef.current.price = option.value)
-                  }
-                  value={selectedOptionsRef.current.price}
-                />
-              </div> */}
-
-                {/* <div style={{ width: "123px" }} className="display-none">
-                  <Select
-                  //  options={options.category}
-                      options={options.category.map((value) => ({ value, label: value }))}
-    onChange={(option) =>
-      (selectedOptionsRef.current.category = option)
-    }
-                    // placeholder="Category"
-                    isSearchable={false}
-                    styles={dropdownStyles}
-                    value={selectedOptionsRef.current.category}
-                  />
-                </div>
-
-                <div style={{ width: "167px" }} className="display-none">
-                  <Select
-                    value={selectedOption}
-                    onChange={handleChange}
-                    options={options}
-                    placeholder="SubCategory"
-                    isSearchable={false}
-                    styles={dropdownStyles}
-                  />
-                </div>
-
-                <div style={{ width: "125px" }} className="display-none">
-                  <Select
-                    value={selectedOption}
-                    onChange={handleChange}
-                    options={options}
-                    placeholder="Followers"
-                    isSearchable={false}
-                    styles={dropdownStyles}
-                  />
-                </div>
-
-                <div style={{ width: "88px" }} className="display-none">
-                  <Select
-                    value={selectedOption}
-                    onChange={handleChange}
-                    options={options}
-                    placeholder="Price"
-                    isSearchable={false}
-                    styles={dropdownStyles}
-                  />
-                </div>
-
-                <div className="search-bar display-none">
-                  <div className="search-bar-wrapper">
-                    <input
-                      type="text"
-                      placeholder="Search here"
-                      defaultValue={searchTextRef.current}
-                      onChange={handleInputChange}
-                      ref={searchInputRef}
-                    />
-                  </div>
-                </div> */}
-
                 <div style={{ width: "123px" }} className="display-none">
                   <Select
-                    //  options={options.category}
                     options={options.category.map((value) => ({
                       value,
                       label: value,
                     }))}
-                    // onChange={(option) =>
-                    //   (selectedOptionsRef.current.category = option);
-                    //   setSelectedCategory(option); // Update the selected category directly
-                    // }
                     onChange={(option) => {
                       selectedOptionsRef.current.category = option;
                       setSelectedCategory(option); // Update the selected category directly
@@ -366,7 +269,6 @@ const SearchNavbar = () => {
                     placeholder="Category"
                     isSearchable={false}
                     styles={dropdownStyles}
-                  
                     value={selectedOptionsRef.current.category}
                   />
                 </div>
@@ -398,7 +300,7 @@ const SearchNavbar = () => {
                     }))}
                     onChange={(option) => {
                       selectedOptionsRef.current.price = option;
-                      setSelectedFollowers(option)
+                      setSelectedFollowers(option);
                     }}
                     placeholder="Price"
                     isSearchable={false}
@@ -428,7 +330,7 @@ const SearchNavbar = () => {
                   />
                 </div>
 
-                <div className="search-bar display-none">
+                <div className="search-bar display-none" >
                   <div className="search-bar-wrapper">
                     <input
                       type="text"
@@ -458,7 +360,7 @@ const SearchNavbar = () => {
               </div>
 
               <div
-                className="cart_action Icon-props item-hover small-portion2 icon-hover-color"
+                className="cart_action Icon-props small-portion2 icon-hover-color"
                 style={{ "font-size": "2rem" }}
               >
                 <div
@@ -471,7 +373,7 @@ const SearchNavbar = () => {
 
                 {token && (
                   <Link to="/cart">
-                    <div className="cart-hover-color">
+                    <div>
                       <AiOutlineShoppingCart />
                     </div>
                     {cartLength > 0 && (
@@ -501,73 +403,120 @@ const SearchNavbar = () => {
           </div>
 
           <div style={{ padding: "20px", width: "100px" }}>
-            <div style={{ width: "120px" }} className="display-none">
+
+            <div className="search-bar display-visible">
+                  <div className="search-bar-wrapper-inner">
+                    <input
+                      type="text"
+                      placeholder="Search here"
+                      value={searchTextRef.current}
+                      onChange={handleInputChange}
+                      ref={searchInputRef}
+                    />
+                  </div>
+            </div>
+
+            <div style={{ width: "250px", marginBottom: "20px" }} className="display-visible">
               <Select
-                value={selectedOption}
-                onChange={handleChange}
-                options={options}
+                options={options.category.map((value) => ({
+                  value,
+                  label: value,
+                }))}
+                onChange={(option) => {
+                  selectedOptionsRef.current.category = option;
+                  setSelectedCategory(option); // Update the selected category directly
+                }}
                 placeholder="Category"
                 isSearchable={false}
                 styles={dropdownStyles}
+                value={selectedOptionsRef.current.category}
               />
             </div>
 
-            <div style={{ width: "167px" }} className="display-none">
-              <Select
-                value={selectedOption}
-                onChange={handleChange}
-                options={options}
-                placeholder="Sub Category"
-                isSearchable={false}
-                styles={dropdownStyles}
-              />
-            </div>
+            <div style={{ width: "250px", marginBottom: "20px" }} className="display-visible">
+                  <Select
+                    options={options.subCategory.map((value) => ({
+                      value,
+                      label: value,
+                    }))}
+                    onChange={(option) => {
+                      selectedOptionsRef.current.subCategory = option;
+                      setSelectedSubCategory(option);
+                    }}
+                    placeholder="SubCategory"
+                    isSearchable={false}
+                    styles={dropdownStyles}
+                    value={options.subCategory.find(
+                      (value) =>
+                        value === selectedOptionsRef.current.subCategory
+                    )}
+                  />
+                </div>
 
-            <div style={{ width: "125px" }} className="display-none">
-              <Select
-                value={selectedOption}
-                onChange={handleChange}
-                options={options}
-                placeholder="Followers"
-                isSearchable={false}
-                styles={dropdownStyles}
-              />
-            </div>
+                <div style={{ width: "250px", marginBottom: "20px" }} className="display-visible">
+                  <Select
+                    options={options.price.map((value) => ({
+                      value,
+                      label: value,
+                    }))}
+                    onChange={(option) => {
+                      selectedOptionsRef.current.price = option;
+                      setSelectedFollowers(option);
+                    }}
+                    placeholder="Price"
+                    isSearchable={false}
+                    styles={dropdownStyles}
+                    value={options.price.find(
+                      (value) => value === selectedOptionsRef.current.price
+                    )}
+                  />
+                </div>
 
-            <div style={{ width: "88px" }} className="display-none">
-              <Select
-                value={selectedOption}
-                onChange={handleChange}
-                options={options}
-                placeholder="Price"
-                isSearchable={false}
-                styles={dropdownStyles}
-              />
-            </div>
+                <div style={{ width: "250px", marginBottom: "20px" }} className="display-visible">
+                  <Select
+                    options={options.followers.map((value) => ({
+                      value,
+                      label: value,
+                    }))}
+                    onChange={(option) => {
+                      selectedOptionsRef.current.followers = option;
+                      setSelectedPrice(option);
+                    }}
+                    placeholder="Followers"
+                    isSearchable={false}
+                    styles={dropdownStyles}
+                    value={options.followers.find(
+                      (value) => value === selectedOptionsRef.current.followers
+                    )}
+                  />
+                </div>
 
-            <div className="search-bar display-none">
-              <div className="search-bar-wrapper">
-                <input
-                  type="text"
-                  placeholder="Search here"
-                  defaultValue={searchTextRef.current}
-                  onChange={handleInputChange}
-                  ref={searchInputRef}
-                />
-              </div>
-            </div>
+                <div className="inner-buttons">
+                <div className="display-no">
+                  <button className="search-button" onClick={handleSearch}>
+                    Search
+                  </button>
+                </div>
 
-            <div className="display-none">
-              <button className="search-button" onClick={handleSearch}>
-                Search
-              </button>
-            </div>
+                <div className="displ">
+                  <button
+                    type="submit"
+                    className="btn"
+                    onClick={handleClearSearch}
+                  >
+                    Clear
+                  </button>
+                </div>
+                </div>
 
-            <div className="display-none">
-              <button type="submit" className="btn" onClick={handleClearSearch}>
-                Clear
-              </button>
-            </div>
+
+
+
+
+
+
+
+
           </div>
         </div>
       </div>

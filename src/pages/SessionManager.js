@@ -15,6 +15,7 @@ const MouseTracker = () => {
         sessionManagementEndpoint,
         {}
       );
+      console.log('statusCode resetSessionTimer',statusCode)
       if (statusCode === true) {
         if (localStorage.getItem("E_COMMERCE_TOKEN"))
           localStorage.removeItem("E_COMMERCE_TOKEN");

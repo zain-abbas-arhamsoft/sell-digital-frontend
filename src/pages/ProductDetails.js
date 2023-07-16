@@ -24,6 +24,7 @@ const ProductDetails = () => {
   const { cartsLength } = useContext(cartContext);
   const {  handleActive, activeClass } = useActive(false);
   const { productID } = useParams();
+  console.log('productID params',productID)
   const [previewImg, setPreviewImg] = useState(image[0]);
 
   const calculateCartItems = async () => {
@@ -72,12 +73,15 @@ const ProductDetails = () => {
     );
     if (statusCode === true) {
       setProductDetail(data);
-      setImage(data.image);
+      setImage(data?.image);
+      getRelatedProducts();
     }
   };
   const getRelatedProducts = async () => {
-    const categoryId = productDetail.categoryId._id;
-    const productId = productDetail._id;
+    const categoryId = productDetail.categoryId?._id;
+    console.log('categoryId',categoryId)
+    const productId = productDetail?._id;
+    console.log('productId',productId)
     const { statusCode, data } = await Api.getRelatedDetail(
       relatedProductDetailEndpoint,
       {
@@ -85,6 +89,7 @@ const ProductDetails = () => {
         productId,
       }
     );
+    console.log('data',data)
     if (statusCode === true) {
       setRelatedProductDetail(data);
     }
@@ -92,9 +97,9 @@ const ProductDetails = () => {
   useEffect(() => {
     getProductDetails();
   }, [productID]);
-  useEffect(() => {
-    getRelatedProducts();
-  }, [productDetail]);
+  // useEffect(() => {
+  //   getRelatedProducts();
+  // }, []);
   return (
     <>
       <section id="product_details">

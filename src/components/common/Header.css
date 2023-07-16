@@ -28,3 +28,11 @@
 .light-color {
     color: var(--text-color);
 }
+
+
+
+@media (max-width: 450px) {
+    .header-display-none {
+        display: none;
+    }
+}

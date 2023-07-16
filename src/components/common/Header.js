@@ -24,13 +24,13 @@ const Header = () => {
               <Link to="/"></Link>
             </h2>
             <nav className="nav_actions">
-              <div className="cart_action item-hover">
+              <div className="cart_action item-hover header-display-none">
                 <Link to="/about-us">
                   <p>About Us</p>
                 </Link>
               </div>
 
-              <div className="cart_action item-hover">
+              <div className="cart_action item-hover header-display-none">
                 <Link to="/contact-us">
                   <p>Contact Us</p>
                 </Link>

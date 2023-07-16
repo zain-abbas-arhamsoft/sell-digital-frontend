@@ -167,6 +167,7 @@ const resetSessionTimer = async (path, body) => {
     };
     const res = await fetch(config.baseURL + path, params);
     const data = await res.json();
+    console.log('data resetSessionTimer',data)
     return { statusCode: data.success };
   } catch (e) {
     console.log(`error  post Request (${path}) :- `, e);
