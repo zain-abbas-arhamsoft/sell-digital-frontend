@@ -220,7 +220,7 @@ const SearchNavbar = () => {
       document.getElementById("side_sidebar")?.classList.add("side_sidebarshow");
       setBtnSt(false);
     } else {
-      document.querySelector(".side_toggle span").classList.remove("toggle");
+      document.querySelector(".side_toggle span")?.classList.remove("toggle");
       document
         .getElementById("side_sidebar")
         ?.classList.remove("side_sidebarshow");
