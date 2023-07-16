@@ -74,7 +74,7 @@ const ProductDetails = () => {
     if (statusCode === true) {
       setProductDetail(data);
       setImage(data?.image);
-      getRelatedProducts();
+      // getRelatedProducts();
     }
   };
   const getRelatedProducts = async () => {
@@ -97,9 +97,9 @@ const ProductDetails = () => {
   useEffect(() => {
     getProductDetails();
   }, [productID]);
-  // useEffect(() => {
-  //   getRelatedProducts();
-  // }, []);
+  useEffect(() => {
+    getRelatedProducts();
+  }, [productDetail]);
   return (
     <>
       <section id="product_details">
