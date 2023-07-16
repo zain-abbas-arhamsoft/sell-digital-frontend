@@ -216,14 +216,14 @@ const SearchNavbar = () => {
   const handleClick = () => {
     console.log("ia m in handle toggle click");
     if (btnSt) {
-      document.querySelector(".side_toggle span").classList.add("toggle");
-      document.getElementById("side_sidebar").classList.add("side_sidebarshow");
+      document.querySelector(".side_toggle span")?.classList.add("toggle");
+      document.getElementById("side_sidebar")?.classList.add("side_sidebarshow");
       setBtnSt(false);
     } else {
       document.querySelector(".side_toggle span").classList.remove("toggle");
       document
         .getElementById("side_sidebar")
-        .classList.remove("side_sidebarshow");
+        ?.classList.remove("side_sidebarshow");
       setBtnSt(true);
     }
   };

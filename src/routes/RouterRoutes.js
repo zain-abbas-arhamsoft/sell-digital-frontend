@@ -16,7 +16,7 @@ const RouterRoutes = () => {
     useScrollRestore();
     return (
         <>
-        <SessionManager/>
+        {/* <SessionManager/> */}
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
