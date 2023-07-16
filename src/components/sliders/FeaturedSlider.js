@@ -4,10 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, A11y, Autoplay } from "swiper";
 import { Api } from "../../utils/Api";
 import { recentlyAddedProducts } from "../../utils/Endpoint";
-import "swiper/scss";
-import "swiper/scss/autoplay";
-import "swiper/scss/pagination";
-import "swiper/scss/effect-coverflow";
+// import "swiper/scss";
+// import "swiper/scss/autoplay";
+// import "swiper/scss/pagination";
+// import "swiper/scss/effect-coverflow";
+import "swiper/scss/swiper.scss";
+import "swiper/scss/autoplay.scss";
+import "swiper/scss/pagination.scss";
+import "swiper/scss/effect-coverflow.scss";
 import commonContext from "../../contexts/common/commonContext";
 const FeaturedSlider = () => {
   const { setProductID } = useContext(commonContext);
