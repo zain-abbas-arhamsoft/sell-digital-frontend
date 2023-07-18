@@ -67,7 +67,7 @@ const HeroSlider = () => {
           </div>
         </div>
 
-        {/* <div className="second-half ">
+         <div className="second-half ">
           <div className={`display-none myclass social-account-color ${slides[currentSlideIndex].type}`}>
             <div className="small-slider" style={{ marginLeft: "-50px" }}>
               <Carousel
@@ -89,7 +89,7 @@ const HeroSlider = () => {
                 ))}
               </Carousel>
             </div>
-
+{/* 
             <div
               className="small-slider"
               style={{ marginLeft: "auto", marginRight: "-50px" }}
@@ -111,9 +111,9 @@ const HeroSlider = () => {
                   </div>
                 ))}
               </Carousel>
-            </div>
+            </div> */}
 
-            <div className="small-slider" style={{ marginLeft: "-50px" }}>
+            {/* <div className="small-slider" style={{ marginLeft: "-50px" }}>
               <Carousel
                 showThumbs={false}
                 showStatus={false}
@@ -131,9 +131,9 @@ const HeroSlider = () => {
                   </div>
                 ))}
               </Carousel>
-            </div>
+            </div> */}
           </div>
-        </div> */}
+        </div> 
       </div>
     </>
   );
