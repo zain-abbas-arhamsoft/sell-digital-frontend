@@ -404,13 +404,13 @@ const SearchNavbar = () => {
           <div style={{ padding: "20px", width: "100px" }}>
             <div className="search-bar display-visible">
               <div className="search-bar-wrapper-inner">
-                <input
-                  type="text"
-                  placeholder="Search here"
-                  defaultValue={searchTextRef.current}
-                  onChange={handleInputChange}
-                  ref={searchInputRef}
-                />
+                 <input
+                      type="text"
+                      placeholder="Search here"
+                      defaultValue={searchTextRef.current}
+                      onChange={handleInputChange}
+                      ref={searchInputRef}
+                    />
               </div>
             </div>
 
