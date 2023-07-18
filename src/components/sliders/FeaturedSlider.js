@@ -31,39 +31,39 @@ const FeaturedSlider = () => {
   };
 
   return (
-    <Swiper
-      // modules={[EffectCoverflow, Pagination, A11y, Autoplay]}
-      // loop={true}
-      // speed={400}
-      // spaceBetween={100}
-      // slidesPerView={"auto"}
-      // pagination={{ clickable: true }}
-      // effect={"coverflow"}
-      // centeredSlides={true}
-      // coverflowEffect={{
-      //   rotate: 0,
-      //   stretch: 0,
-      //   depth: 70,
-      //   modifier: 3,
-      //   slideShadows: false,
-      // }}
-      autoplay={{
-        delay: 3500,
-        disableOnInteraction: false,
-      }}
-      // breakpoints={{
-      //   768: {
-      //     slidesPerView: 2,
-      //     spaceBetween: 200,
-      //   },
-      //   992: {
-      //     slidesPerView: 3,
-      //     spaceBetween: 250,
-      //   },
-      // }}
-      className="featured_swiper"
-    >
-    
+    // <Swiper
+    // modules={[EffectCoverflow, Pagination, A11y, Autoplay]}
+    // loop={true}
+    // speed={400}
+    // spaceBetween={100}
+    // slidesPerView={"auto"}
+    // pagination={{ clickable: true }}
+    // effect={"coverflow"}
+    // centeredSlides={true}
+    // coverflowEffect={{
+    //   rotate: 0,
+    //   stretch: 0,
+    //   depth: 70,
+    //   modifier: 3,
+    //   slideShadows: false,
+    // }}
+    // autoplay={{
+    //   delay: 3500,
+    //   disableOnInteraction: false,
+    // }}
+    // breakpoints={{
+    //   768: {
+    //     slidesPerView: 2,
+    //     spaceBetween: 200,
+    //   },
+    //   992: {
+    //     slidesPerView: 3,
+    //     spaceBetween: 250,
+    //   },
+    // }}
+    //   className="featured_swiper"
+    // >
+    <>
       {recentlyAdded.length > 0 &&
         recentlyAdded.map((item) => {
           const { image, title, price } = item;
@@ -89,9 +89,8 @@ const FeaturedSlider = () => {
             </SwiperSlide>
           );
         })}
-
-      </Swiper>
-    
+    </>
+    // </Swiper>
   );
 };
 
