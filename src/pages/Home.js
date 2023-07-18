@@ -9,14 +9,14 @@ const Home = () => {
     return (
         <main>
             <section id="">
-                <HeroSlider />
+                {/* <HeroSlider /> */}
             </section>
-            <section id="" className="section">
+            {/* <section id="" className="section">
                 <div className="container">
                     <SectionsHead heading="Recently Added Products" />
                     <FeaturedSlider/>
                 </div>
-            </section>
+            </section> */}
             <section id="featured" className="section">
                 <div className="container">
                     <SectionsHead heading="Featured Products" />
