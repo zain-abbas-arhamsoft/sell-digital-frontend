@@ -47,20 +47,20 @@ const FeaturedSlider = () => {
     //   modifier: 3,
     //   slideShadows: false,
     // }}
-    // autoplay={{
-    //   delay: 3500,
-    //   disableOnInteraction: false,
-    // }}
-    // breakpoints={{
-    //   768: {
-    //     slidesPerView: 2,
-    //     spaceBetween: 200,
-    //   },
-    //   992: {
-    //     slidesPerView: 3,
-    //     spaceBetween: 250,
-    //   },
-    // }}
+    autoplay={{
+      delay: 3500,
+      disableOnInteraction: false,
+    }}
+    breakpoints={{
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 200,
+      },
+      992: {
+        slidesPerView: 3,
+        spaceBetween: 250,
+      },
+    }}
       className="featured_swiper"
     >
   
