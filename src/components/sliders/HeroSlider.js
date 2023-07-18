@@ -89,7 +89,7 @@ const HeroSlider = () => {
                 ))}
               </Carousel>
             </div>
-{/* 
+
             <div
               className="small-slider"
               style={{ marginLeft: "auto", marginRight: "-50px" }}
@@ -111,7 +111,7 @@ const HeroSlider = () => {
                   </div>
                 ))}
               </Carousel>
-            </div> */}
+            </div>
 
             {/* <div className="small-slider" style={{ marginLeft: "-50px" }}>
               <Carousel
