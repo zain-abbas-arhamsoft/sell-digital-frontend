@@ -113,7 +113,7 @@ const HeroSlider = () => {
               </Carousel>
             </div>
 
-            {/* <div className="small-slider" style={{ marginLeft: "-50px" }}>
+            <div className="small-slider" style={{ marginLeft: "-50px" }}>
               <Carousel
                 showThumbs={false}
                 showStatus={false}
@@ -131,7 +131,7 @@ const HeroSlider = () => {
                   </div>
                 ))}
               </Carousel>
-            </div> */}
+            </div>
           </div>
         </div> 
       </div>
