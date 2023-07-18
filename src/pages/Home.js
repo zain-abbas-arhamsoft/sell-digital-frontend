@@ -9,7 +9,7 @@ const Home = () => {
     return (
         <main>
             <section id="">
-                {/* <HeroSlider /> */}
+                <HeroSlider />
             </section>
             <section id="" className="section">
                 <div className="container">
