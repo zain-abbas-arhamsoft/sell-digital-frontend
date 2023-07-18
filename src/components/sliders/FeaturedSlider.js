@@ -33,8 +33,8 @@ const FeaturedSlider = () => {
   return (
     <Swiper
     modules={[EffectCoverflow, Pagination, A11y, Autoplay]}
-    // loop={true}
-    // speed={400}
+    loop={true}
+    speed={400}
     // spaceBetween={100}
     // slidesPerView={"auto"}
     // pagination={{ clickable: true }}
