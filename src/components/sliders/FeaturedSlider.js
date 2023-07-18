@@ -18,7 +18,7 @@ const FeaturedSlider = () => {
       {}
     );
     if (statusCode === true) {
-      console.log('data recently added products',data)
+      console.log("data recently added products", data);
       setRecentlyAdded(data);
     }
   };
@@ -31,39 +31,40 @@ const FeaturedSlider = () => {
   };
 
   return (
-    <Swiper
-      modules={[EffectCoverflow, Pagination, A11y, Autoplay]}
-      loop={true}
-      speed={400}
-      spaceBetween={100}
-      slidesPerView={"auto"}
-      pagination={{ clickable: true }}
-      effect={"coverflow"}
-      centeredSlides={true}
-      coverflowEffect={{
-        rotate: 0,
-        stretch: 0,
-        depth: 70,
-        modifier: 3,
-        slideShadows: false,
-      }}
-      autoplay={{
-        delay: 3500,
-        disableOnInteraction: false,
-      }}
-      breakpoints={{
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 200,
-        },
-        992: {
-          slidesPerView: 3,
-          spaceBetween: 250,
-        },
-      }}
-      className="featured_swiper"
-    >
-        {recentlyAdded.length > 0 &&
+    // <Swiper
+    //   modules={[EffectCoverflow, Pagination, A11y, Autoplay]}
+    //   loop={true}
+    //   speed={400}
+    //   spaceBetween={100}
+    //   slidesPerView={"auto"}
+    //   pagination={{ clickable: true }}
+    //   effect={"coverflow"}
+    //   centeredSlides={true}
+    //   coverflowEffect={{
+    //     rotate: 0,
+    //     stretch: 0,
+    //     depth: 70,
+    //     modifier: 3,
+    //     slideShadows: false,
+    //   }}
+    //   autoplay={{
+    //     delay: 3500,
+    //     disableOnInteraction: false,
+    //   }}
+    //   breakpoints={{
+    //     768: {
+    //       slidesPerView: 2,
+    //       spaceBetween: 200,
+    //     },
+    //     992: {
+    //       slidesPerView: 3,
+    //       spaceBetween: 250,
+    //     },
+    //   }}
+    //   className="featured_swiper"
+    // >
+    <>
+      {recentlyAdded.length > 0 &&
         recentlyAdded.map((item) => {
           const { image, title, price } = item;
           const productID = item._id;
@@ -76,10 +77,7 @@ const FeaturedSlider = () => {
                 onClick={() => handleImageClick(productID)}
               >
                 <Link to={`/product-details/${productID}`}>
-                  <img
-                    src={image[0]}
-                    alt=""
-                  />
+                  <img src={image[0]} alt="" />
                 </Link>
               </figure>
               <h2 className="products_price">
@@ -92,7 +90,8 @@ const FeaturedSlider = () => {
           );
         })}
 
-    </Swiper>
+      {/* </Swiper> */}
+    </>
   );
 };
 
