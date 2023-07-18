@@ -36,7 +36,7 @@ const FeaturedSlider = () => {
     loop={true}
     speed={400}
     // spaceBetween={100}
-    // slidesPerView={"auto"}
+    slidesPerView={"auto"}
     pagination={{ clickable: true }}
     effect={"coverflow"}
     centeredSlides={true}
