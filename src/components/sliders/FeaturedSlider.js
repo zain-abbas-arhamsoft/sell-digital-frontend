@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-// import { EffectCoverflow, Pagination, A11y, Autoplay } from "swiper";
+import { EffectCoverflow, Pagination, A11y, Autoplay } from "swiper";
 import { Api } from "../../utils/Api";
 import { recentlyAddedProducts } from "../../utils/Endpoint";
 import "swiper/scss";
@@ -32,35 +32,35 @@ const FeaturedSlider = () => {
 
   return (
     <Swiper
-    // modules={[EffectCoverflow, Pagination, A11y, Autoplay]}
-    loop={true}
-    speed={400}
-    spaceBetween={100}
-    slidesPerView={"auto"}
-    pagination={{ clickable: true }}
-    effect={"coverflow"}
-    centeredSlides={true}
-    coverflowEffect={{
-      rotate: 0,
-      stretch: 0,
-      depth: 70,
-      modifier: 3,
-      slideShadows: false,
-    }}
-    autoplay={{
-      delay: 3500,
-      disableOnInteraction: false,
-    }}
-    breakpoints={{
-      768: {
-        slidesPerView: 2,
-        spaceBetween: 200,
-      },
-      992: {
-        slidesPerView: 3,
-        spaceBetween: 250,
-      },
-    }}
+    modules={[EffectCoverflow, Pagination, A11y, Autoplay]}
+    // loop={true}
+    // speed={400}
+    // spaceBetween={100}
+    // slidesPerView={"auto"}
+    // pagination={{ clickable: true }}
+    // effect={"coverflow"}
+    // centeredSlides={true}
+    // coverflowEffect={{
+    //   rotate: 0,
+    //   stretch: 0,
+    //   depth: 70,
+    //   modifier: 3,
+    //   slideShadows: false,
+    // }}
+    // autoplay={{
+    //   delay: 3500,
+    //   disableOnInteraction: false,
+    // }}
+    // breakpoints={{
+    //   768: {
+    //     slidesPerView: 2,
+    //     spaceBetween: 200,
+    //   },
+    //   992: {
+    //     slidesPerView: 3,
+    //     spaceBetween: 250,
+    //   },
+    // }}
       className="featured_swiper"
     >
   
