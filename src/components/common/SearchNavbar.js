@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import {
-  AiOutlineShoppingCart,
-  AiOutlineSearch,
-} from "react-icons/ai";
+import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import commonContext from "../../contexts/common/commonContext";
 import cartContext from "../../contexts/cart/cartContext";
 import Select from "react-select";
@@ -16,19 +13,19 @@ import {
   getAllProductEndpoint,
 } from "../../utils/Endpoint";
 
-
 const SearchNavbar = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  // const [selectedOption, setSelectedOption] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [selectedFollowers, setSelectedFollowers] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState(null);
-  const handleChange = (selectedOption) => {
-    setSelectedOption(selectedOption);
-  };
-  const [isOpen, setIsOpen] = useState(false);
+  const searchInputRef = useRef(null);
+  const searchTextRef = useRef("");
+  // const handleChange = (selectedOption) => {
+  //   setSelectedOption(selectedOption);
+  // };
+  // const [isOpen, setIsOpen] = useState(false);
 
-  
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
@@ -39,22 +36,17 @@ const SearchNavbar = () => {
       setIsSticky(topOffset > threshold);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
-  
-  
-  
-  
 
-  const handleItemClick = (item) => {
-    console.log(item); // Replace with your desired action
-    setIsOpen(false);
-  };
+  // const handleItemClick = (item) => {
+  //   console.log(item); // Replace with your desired action
+  //   setIsOpen(false);
+  // };
   const { cartLength } = useContext(cartContext);
   const token = getToken(); // Get the token from localStorage
   const { setSearchResults, toggleSearch } = useContext(commonContext);
@@ -64,8 +56,7 @@ const SearchNavbar = () => {
     price: [],
     followers: [],
   });
-  const searchInputRef = useRef(null);
-  const searchTextRef = useRef("");
+
   const selectedOptionsRef = useRef({
     category: "Category",
     subCategory: "SubCategory",
@@ -74,6 +65,7 @@ const SearchNavbar = () => {
   });
   const handleInputChange = (e) => {
     searchTextRef.current = e.target.value;
+    searchInputRef.current = e.target.value;
   };
   const handleClearSearch = async () => {
     selectedOptionsRef.current = {
@@ -82,10 +74,14 @@ const SearchNavbar = () => {
       price: "Price",
       followers: "Followers",
     };
+    // Clear the search text in the ref
+    searchTextRef.current = "";
+    searchInputRef.current = "";
+    // if (searchInputRef.current) {
+    //   searchInputRef.current.value = "";
+    // }
+    console.log("searchTextRef", searchTextRef.current);
     console.log("searchInputRef", searchInputRef.current);
-    searchTextRef.current = ""; // Update the ref value directly
-    searchInputRef.current.value = "";
-    console.log("searchInputRef...", searchInputRef.current);
     const { statusCode, data } = await Api.getAllProducts(
       getAllProductEndpoint,
       {}
@@ -120,7 +116,8 @@ const SearchNavbar = () => {
       "selectedOptionsRef.current.category",
       selectedOptionsRef.current.category
     );
-    console.log("searchTextRef.current", searchTextRef.current);
+    console.log("searchTextRef...", searchTextRef.current);
+    console.log("searchInputRef...", searchInputRef.current);
     const parameters = {
       category:
         selectedOptionsRef.current.category.value !== "Category"
@@ -217,7 +214,9 @@ const SearchNavbar = () => {
     console.log("ia m in handle toggle click");
     if (btnSt) {
       document.querySelector(".side_toggle span")?.classList.add("toggle");
-      document.getElementById("side_sidebar")?.classList.add("side_sidebarshow");
+      document
+        .getElementById("side_sidebar")
+        ?.classList.add("side_sidebarshow");
       setBtnSt(false);
     } else {
       document.querySelector(".side_toggle span")?.classList.remove("toggle");
@@ -230,7 +229,7 @@ const SearchNavbar = () => {
 
   return (
     <>
-      <nav id="second-navbar" className={isSticky ? 'sticky' : ''}>
+      <nav id="second-navbar" className={isSticky ? "sticky" : ""}>
         <header id="searchNavbar">
           <div className="outer-padding">
             <nav className="second-nav">
@@ -330,12 +329,12 @@ const SearchNavbar = () => {
                   />
                 </div>
 
-                <div className="search-bar display-none" >
+                <div className="search-bar display-none">
                   <div className="search-bar-wrapper">
                     <input
                       type="text"
                       placeholder="Search here"
-                      value={searchTextRef.current}
+                      defaultValue={searchTextRef.current}
                       onChange={handleInputChange}
                       ref={searchInputRef}
                     />
@@ -403,20 +402,22 @@ const SearchNavbar = () => {
           </div>
 
           <div style={{ padding: "20px", width: "100px" }}>
-
             <div className="search-bar display-visible">
-                  <div className="search-bar-wrapper-inner">
-                    <input
-                      type="text"
-                      placeholder="Search here"
-                      value={searchTextRef.current}
-                      onChange={handleInputChange}
-                      ref={searchInputRef}
-                    />
-                  </div>
+              <div className="search-bar-wrapper-inner">
+                <input
+                  type="text"
+                  placeholder="Search here"
+                  defaultValue={searchTextRef.current}
+                  onChange={handleInputChange}
+                  ref={searchInputRef}
+                />
+              </div>
             </div>
 
-            <div style={{ width: "250px", marginBottom: "20px" }} className="display-visible">
+            <div
+              style={{ width: "250px", marginBottom: "20px" }}
+              className="display-visible"
+            >
               <Select
                 options={options.category.map((value) => ({
                   value,
@@ -433,90 +434,89 @@ const SearchNavbar = () => {
               />
             </div>
 
-            <div style={{ width: "250px", marginBottom: "20px" }} className="display-visible">
-                  <Select
-                    options={options.subCategory.map((value) => ({
-                      value,
-                      label: value,
-                    }))}
-                    onChange={(option) => {
-                      selectedOptionsRef.current.subCategory = option;
-                      setSelectedSubCategory(option);
-                    }}
-                    placeholder="SubCategory"
-                    isSearchable={false}
-                    styles={dropdownStyles}
-                    value={options.subCategory.find(
-                      (value) =>
-                        value === selectedOptionsRef.current.subCategory
-                    )}
-                  />
-                </div>
+            <div
+              style={{ width: "250px", marginBottom: "20px" }}
+              className="display-visible"
+            >
+              <Select
+                options={options.subCategory.map((value) => ({
+                  value,
+                  label: value,
+                }))}
+                onChange={(option) => {
+                  selectedOptionsRef.current.subCategory = option;
+                  setSelectedSubCategory(option);
+                }}
+                placeholder="SubCategory"
+                isSearchable={false}
+                styles={dropdownStyles}
+                value={options.subCategory.find(
+                  (value) => value === selectedOptionsRef.current.subCategory
+                )}
+              />
+            </div>
 
-                <div style={{ width: "250px", marginBottom: "20px" }} className="display-visible">
-                  <Select
-                    options={options.price.map((value) => ({
-                      value,
-                      label: value,
-                    }))}
-                    onChange={(option) => {
-                      selectedOptionsRef.current.price = option;
-                      setSelectedFollowers(option);
-                    }}
-                    placeholder="Price"
-                    isSearchable={false}
-                    styles={dropdownStyles}
-                    value={options.price.find(
-                      (value) => value === selectedOptionsRef.current.price
-                    )}
-                  />
-                </div>
+            <div
+              style={{ width: "250px", marginBottom: "20px" }}
+              className="display-visible"
+            >
+              <Select
+                options={options.price.map((value) => ({
+                  value,
+                  label: value,
+                }))}
+                onChange={(option) => {
+                  selectedOptionsRef.current.price = option;
+                  setSelectedPrice(option);
+                }}
+                placeholder="Price"
+                isSearchable={false}
+                styles={dropdownStyles}
+                value={options.price.find(
+                  (value) => value === selectedOptionsRef.current.price
+                )}
+              />
+            </div>
 
-                <div style={{ width: "250px", marginBottom: "20px" }} className="display-visible">
-                  <Select
-                    options={options.followers.map((value) => ({
-                      value,
-                      label: value,
-                    }))}
-                    onChange={(option) => {
-                      selectedOptionsRef.current.followers = option;
-                      setSelectedPrice(option);
-                    }}
-                    placeholder="Followers"
-                    isSearchable={false}
-                    styles={dropdownStyles}
-                    value={options.followers.find(
-                      (value) => value === selectedOptionsRef.current.followers
-                    )}
-                  />
-                </div>
+            <div
+              style={{ width: "250px", marginBottom: "20px" }}
+              className="display-visible"
+            >
+              <Select
+                options={options.followers.map((value) => ({
+                  value,
+                  label: value,
+                }))}
+                onChange={(option) => {
+                  selectedOptionsRef.current.followers = option;
+                  setSelectedFollowers(option);
+                }}
+                placeholder="Followers"
+                isSearchable={false}
+                styles={dropdownStyles}
+                value={options.followers.find(
+                  (value) => value === selectedOptionsRef.current.followers
+                )}
+              />
+            </div>
 
-                <div className="inner-buttons">
-                <div className="display-no">
-                  <button className="search-button" onClick={handleSearch}>
-                    Search
-                  </button>
-                </div>
+            <div className="inner-buttons">
+              <div className="display-no">
+                <button className="search-button" onClick={handleSearch}>
+                  Search
+                </button>
+              </div>
 
-                <div className="displ">
-                  <button
-                    type="submit"
-                    className="btn"
-                    onClick={handleClearSearch}
-                  >
-                    Clear
-                  </button>
-                </div>
-                </div>
-
-
-
-
-
-
-
-
-
+              <div className="displ">
+                <button
+                  type="submit"
+                  className="btn"
+                  onClick={handleClearSearch}
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
