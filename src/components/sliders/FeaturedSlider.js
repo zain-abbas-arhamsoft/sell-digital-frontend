@@ -35,8 +35,8 @@ const FeaturedSlider = () => {
     modules={[EffectCoverflow, Pagination, A11y, Autoplay]}
     loop={true}
     speed={400}
-    // spaceBetween={100}
-    slidesPerView={"auto"}
+    spaceBetween={100}
+    // slidesPerView={"auto"}
     pagination={{ clickable: true }}
     effect={"coverflow"}
     centeredSlides={true}
