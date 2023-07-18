@@ -40,13 +40,13 @@ const FeaturedSlider = () => {
     // pagination={{ clickable: true }}
     // effect={"coverflow"}
     // centeredSlides={true}
-    // coverflowEffect={{
-    //   rotate: 0,
-    //   stretch: 0,
-    //   depth: 70,
-    //   modifier: 3,
-    //   slideShadows: false,
-    // }}
+    coverflowEffect={{
+      rotate: 0,
+      stretch: 0,
+      depth: 70,
+      modifier: 3,
+      slideShadows: false,
+    }}
     autoplay={{
       delay: 3500,
       disableOnInteraction: false,
