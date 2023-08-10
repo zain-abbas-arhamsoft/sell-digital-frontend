@@ -21,6 +21,5 @@ export const calculateDiscount = (discountedPrice, originalPrice) => {
 export const calculateTotal = (arr) => {
     let total = arr.reduce((accum, item) => accum + item.updatedPrice, 0);
     total = Number(total)
-    console.log('total', total)
     return total;
 };

@@ -14,7 +14,6 @@ const registerUser = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data };
   } catch (e) {
-    console.log(`error in post Request (${path}) :- `, e);
   }
 };
 const loginUser = async (path, body) => {
@@ -30,11 +29,9 @@ const loginUser = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data };
   } catch (e) {
-    console.log(`error in post Request (${path}) :- `, e);
   }
 };
 const forgotPassword = async (path, body) => {
-  console.log(config.baseURL + path);
   try {
     const params = {
       method: "POST",
@@ -47,12 +44,12 @@ const forgotPassword = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
+    // console.log(`error  post Request (${path}) :- `, e);
   }
 };
 
 const LinkExpired = async (path, body) => {
-  console.log(config.baseURL + path);
+
   try {
     const params = {
       method: "POST",
@@ -66,7 +63,6 @@ const LinkExpired = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data };
   } catch (e) {
-    console.log(`error in post Request (${path}) :- `, e);
   }
 };
 const verifyToken = async (path, body) => {
@@ -82,7 +78,6 @@ const verifyToken = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data };
   } catch (e) {
-    console.log(`error in post Request (${path}) :- `, e);
   }
 };
 const resetPassword = async (path, body) => {
@@ -98,7 +93,6 @@ const resetPassword = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data };
   } catch (e) {
-    console.log(`error in post Request (${path}) :- `, e);
   }
 };
 const getAllProducts = async (path, body) => {
@@ -113,12 +107,10 @@ const getAllProducts = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data.obj };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 
 const updateProfile = async (path, body) => {
-  console.log(config.baseURL + path);
   const token = getToken();
   try {
     const params = {
@@ -133,12 +125,10 @@ const updateProfile = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 
 const getProfileData = async (path, body) => {
-  console.log(config.baseURL + path);
   const token = getToken();
   try {
     const params = {
@@ -152,12 +142,10 @@ const getProfileData = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data.data };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 
 const resetSessionTimer = async (path, body) => {
-  console.log(config.baseURL + path);
   try {
     const params = {
       method: "GET",
@@ -167,14 +155,11 @@ const resetSessionTimer = async (path, body) => {
     };
     const res = await fetch(config.baseURL + path, params);
     const data = await res.json();
-    console.log('data resetSessionTimer',data)
     return { statusCode: data.success };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 const getDynamicList = async (path, body) => {
-  console.log(config.baseURL + path);
   try {
     const params = {
       method: "GET",
@@ -186,12 +171,10 @@ const getDynamicList = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data.dynamicData };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 
 const getFeaturedProducts = async (path, body) => {
-  console.log(config.baseURL + path);
   try {
     const params = {
       method: "GET",
@@ -203,12 +186,10 @@ const getFeaturedProducts = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data.obj };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 
 const getRecentlyAddedProducts = async (path, body) => {
-  console.log(config.baseURL + path);
   try {
     const params = {
       method: "GET",
@@ -220,11 +201,9 @@ const getRecentlyAddedProducts = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data.recentlyAddedProducts };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 const getSearchProducts = async (path, body) => {
-  console.log(config.baseURL + path);
   try {
     const params = {
       method: "GET",
@@ -236,12 +215,10 @@ const getSearchProducts = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data.obj };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 
 const getProductDetail = async (path, body) => {
-  console.log(config.baseURL + path);
   try {
     const params = {
       method: "GET",
@@ -253,12 +230,10 @@ const getProductDetail = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data.product };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 
 const getRelatedDetail = async (path, body) => {
-  console.log(config.baseURL + path);
   try {
     const params = {
       method: "POST",
@@ -271,12 +246,10 @@ const getRelatedDetail = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data.relatedProducts };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 
 const addItemInCart = async (path, body) => {
-  console.log(config.baseURL + path);
   const token = getToken();
   try {
     const params = {
@@ -291,11 +264,9 @@ const addItemInCart = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 const showCart = async (path, body) => {
-  console.log(config.baseURL + path);
   const token = getToken();
   try {
     const params = {
@@ -309,12 +280,10 @@ const showCart = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data.data };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 
 const removeCartItem = async (path, body) => {
-  console.log(config.baseURL + path);
   const token = getToken();
   try {
     const params = {
@@ -329,7 +298,6 @@ const removeCartItem = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data: data.remainingCarts };
   } catch (e) {
-    console.log(`error  post Request (${path}) :- `, e);
   }
 };
 

@@ -33,7 +33,6 @@ const CommonProvider = ({ children }) => {
 
   // Search actions
   const toggleSearch = (toggle) => {
-    console.log("toggle", toggle);
     return dispatch({
       type: "TOGGLE_SEARCH",
       payload: { toggle },

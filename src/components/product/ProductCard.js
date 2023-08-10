@@ -53,7 +53,6 @@ const ProductCard = (props) => {
   };
 
   const handleImageClick = () => {
-    console.log('productID',productID)
     // Perform any action you want with the productID when the image is clicked
     setProductID(productID);
   };

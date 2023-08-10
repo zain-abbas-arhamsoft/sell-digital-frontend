@@ -44,7 +44,6 @@ const SearchNavbar = () => {
   }, []);
 
   // const handleItemClick = (item) => {
-  //   console.log(item); // Replace with your desired action
   //   setIsOpen(false);
   // };
   const { cartLength } = useContext(cartContext);
@@ -80,8 +79,6 @@ const SearchNavbar = () => {
     // if (searchInputRef.current) {
     //   searchInputRef.current.value = "";
     // }
-    console.log("searchTextRef", searchTextRef.current);
-    console.log("searchInputRef", searchInputRef.current);
     const { statusCode, data } = await Api.getAllProducts(
       getAllProductEndpoint,
       {}
@@ -112,12 +109,7 @@ const SearchNavbar = () => {
     setSelectedPrice(selectedOptionsRef.current.price);
   }, [selectedOptionsRef.current.price]);
   const handleSearch = async () => {
-    console.log(
-      "selectedOptionsRef.current.category",
-      selectedOptionsRef.current.category
-    );
-    console.log("searchTextRef...", searchTextRef.current);
-    console.log("searchInputRef...", searchInputRef.current);
+  
     const parameters = {
       category:
         selectedOptionsRef.current.category.value !== "Category"
@@ -137,14 +129,12 @@ const SearchNavbar = () => {
           : null,
       searchText: searchTextRef.current !== "" ? searchTextRef.current : null,
     };
-    console.log("parameters", parameters);
     const queryParameters = new URLSearchParams(Object.entries(parameters));
     const { statusCode, data } = await Api.getSearchProducts(
       `${searchedEndpoint}?${queryParameters}`,
       {}
     );
     if (statusCode === true) {
-      console.log("data.products", data.products);
       setSearchResults(data.products);
       toggleSearch(data.allProductsFetched);
     }
@@ -154,7 +144,6 @@ const SearchNavbar = () => {
       dynamicCategoryEndpoint,
       {}
     );
-    console.log("data", data);
     if (statusCode === true) {
       const categoryOpts = [
         "Category",
@@ -174,10 +163,7 @@ const SearchNavbar = () => {
         "Under 1000",
         ...data?.followerRanges.map((option) => option),
       ];
-      console.log("categoryOpts", categoryOpts);
-      console.log("subCategoryOpts", subCategoryOpts);
-      console.log("priceOpts", priceOpts);
-      console.log("followersOpts", followersOpts);
+     
       setOptions({
         category: categoryOpts,
         subCategory: subCategoryOpts,
@@ -211,7 +197,6 @@ const SearchNavbar = () => {
   const [btnSt, setBtnSt] = useState(true);
 
   const handleClick = () => {
-    console.log("ia m in handle toggle click");
     if (btnSt) {
       document.querySelector(".side_toggle span")?.classList.add("toggle");
       document

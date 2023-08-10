@@ -31,7 +31,7 @@ const CartItem = (props) => {
       }
     } catch (error) {
       setIsDeleting(false);
-      console.log(error);
+     
     }
   };
 

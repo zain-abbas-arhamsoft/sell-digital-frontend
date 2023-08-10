@@ -13,7 +13,7 @@ const FeaturedProducts = () => {
     searchOpen: false,
   });
   const searchedProduct = useContext(commonContext);
-  console.log("searched", searchedProduct);
+
   const featuredProductsRequest = async () => {
     const { statusCode, data } = await Api.getFeaturedProducts(
       featuredProductEndpoint,
@@ -36,7 +36,7 @@ const FeaturedProducts = () => {
       searchedProduct.searchResults &&
       searchedProduct.searchResults.length > 0
     ) {
-      console.log("if");
+  
       setState((prevState) => ({
         ...prevState,
         filteredProducts: searchedProduct.searchResults.filter(
@@ -48,7 +48,7 @@ const FeaturedProducts = () => {
       searchedProduct.searchResults.length === 0 &&
       searchedProduct.isSearchOpen === true
     ) {
-      console.log("else if");
+ 
       setState((prevState) => ({ ...prevState, filteredProducts: [] }));
     }
     if (
@@ -56,7 +56,7 @@ const FeaturedProducts = () => {
       searchedProduct.searchResults.categoriesData &&
       searchedProduct.searchResults.categoriesData.length > 0
     ) {
-      console.log("next if");
+   
       setState((prevState) => ({
         ...prevState,
         filteredProducts: searchedProduct.searchResults.categoriesData.filter(
@@ -68,7 +68,6 @@ const FeaturedProducts = () => {
       searchedProduct.searchResults.categoriesData &&
       searchedProduct.searchResults.categoriesData.length === 0
     ) {
-      console.log("next else");
       setState((prevState) => ({ ...prevState, filteredProducts: [] }));
     }
     setState((prevState) => ({
@@ -80,7 +79,6 @@ const FeaturedProducts = () => {
   const { featuredProducts, filteredProducts, searchOpen } = state;
 
   useEffect(() => {
-    console.log("filteredProducts", filteredProducts);
   }, [filteredProducts]);
   return (
     <>
