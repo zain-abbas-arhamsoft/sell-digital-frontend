@@ -44,7 +44,6 @@ const forgotPassword = async (path, body) => {
     const data = await res.json();
     return { statusCode: data.success, data };
   } catch (e) {
-    // console.log(`error  post Request (${path}) :- `, e);
   }
 };
 
